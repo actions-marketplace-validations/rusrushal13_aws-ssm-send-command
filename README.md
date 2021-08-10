@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: AWS SSM Send-Command
-        uses: peterkimzz/aws-ssm-send-command@master
+        uses: rusrushal13/aws-ssm-send-command@master
         id: ssm
         with:
           aws-region: ${{ secrets.AWS_REGION }}
@@ -67,7 +67,7 @@ jobs:
 
 ### `instance-ids`
 
-**Required** The id of AWS EC2 instance id (e.g i-xxx...)
+The id of AWS EC2 instance id (e.g i-xxx...)
 
 ```yml
 # single instance
@@ -78,6 +78,14 @@ instance-ids: |
   i-0b1f8b18a1d450000
   i-0b1f8b18a1d450001
   i-0b1f8b18a1d450002
+```
+
+### `targets`
+
+The target groups of AWS EC2 instance. Check `aws ssm send-command help`
+
+```yml
+targets: [{ "Key": "tag:Name", "Values": ["ec2"] }]
 ```
 
 ### `command`
@@ -135,3 +143,11 @@ This error occurs when you are not set AWS IAM role about SSM. Please set the IA
 This error occurs when you are not attach AWS IAM role to your EC2 instance. Please set the IAM role `AmazonSSMFullAccess` (recommended)
 
 > In almost error cases, those issues would be resolved when you set IAM Role to your `AWS Account` and `EC2 IAM Role`.
+
+### Development Setup
+
+```bash
+yarn install
+
+yarn build
+```
