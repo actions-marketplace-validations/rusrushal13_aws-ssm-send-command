@@ -40,7 +40,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          instance-ids: ${{ secrets.INSTANCE_ID }}
+          targets: ${{ secrets.TARGETS }}
 
           working-directory: /home/ubuntu/application
           command: ls -al
@@ -65,27 +65,12 @@ jobs:
 
 **Required** AWS EC2 Instance region. (e.g. us-west-1, us-northeast-1, ...)
 
-### `instance-ids`
-
-The id of AWS EC2 instance id (e.g i-xxx...)
-
-```yml
-# single instance
-instance-ids: i-0b1f8b18a1d450000
-
-# multiple instances (maxium 50 values)
-instance-ids: |
-  i-0b1f8b18a1d450000
-  i-0b1f8b18a1d450001
-  i-0b1f8b18a1d450002
-```
-
 ### `targets`
 
 The target groups of AWS EC2 instance. Check `aws ssm send-command help`
 
 ```yml
-targets: [{ "Key": "tag:Name", "Values": ["ec2"] }]
+targets: '[{ "Key": "tag:Name", "Values": ["ec2"] }]'
 ```
 
 ### `command`
